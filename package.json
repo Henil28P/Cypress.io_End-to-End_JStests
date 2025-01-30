@@ -1,0 +1,15 @@
+{
+  "name": "cypress.io_end-to-end_jstests",
+  "version": "1.0.0",
+  "description": "An End-to-End Javascript web application testing project using Cypress.io to enable UI Test automation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^14.0.1"
+  }
+}
