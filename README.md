@@ -38,3 +38,15 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 
 3. Cypress has access to all the browser’s resources that other frameworks don’t use, which means it can do things like take screenshots and videos of our site while Cypress is running our tests - extremely useful when tests fail since we can simply watch what happens when a certain series of steps is followed.
 4. Cypress is very intuitive and readable - eg. Cypress commands: `cy.get(‘@text-input’).type(‘Hello!’);` (automated test to enter a text into a text box) and `cy,get(‘@enter-button’).click()` (automated test to click a button).
+
+# Limitations of Cypress.io
+
+1. Cypress.io is not suitable to be used for automation on things like data mining, web-crawling.
+2. Cypress.io runs inside a real browser, therefore the only language that Cypress supports for writing tests in is Javascript - this doesn’t mean that we can’t test a site written in some other language than JS, it just means that the tests we write will have to be written in Javascript.
+3. We can’t test multiple tabs or multiple browser windows at the same time - main reason why Cypress doesn’t allow us to do that is because they believe that that’s really no good reason to test multiple tabs or browsers in the same test (eg. if we want to test that clicking a link opens a new tab, we only need to check that the link has the target=”\_blank” set on it). Moreover, if we need to test the functionality of a chat application which requires 2 browsers to chat with each other - we can use other methods such as stubbing.
+4. Cypress doesn’t allow multiple superdomains in 1 test (A superdomain is a domain name such as google.com or linkedin.com).
+
+- Note: we can visit 2 different superdomains in 2 different tests but not in the same test.
+- Anyways, the only time we would need to visit more than 1 superdomain in 1 test is when working with things like OAuth providers.
+
+→ Besides the above permanent trade-offs, the Cypress team decides to fix issues and develop features based on the following list: https://www.github.com/cypress-io/cypress/issues
