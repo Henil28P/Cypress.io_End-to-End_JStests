@@ -16,7 +16,7 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 
 # Introduction to Cypress.io
 
-- <b>Cypress.io<b> - very easy-to-use open-source and free library that allows us to conduct the automated testing (sometimes easier to use than other end-to-end frameworks like Selenium).
+- <b>Cypress.io</b> - very easy-to-use open-source and free library that allows us to conduct the automated testing (sometimes easier to use than other end-to-end frameworks like Selenium).
 - Hence, Cypress.io is a tool that allows us to automate and scale end-to-end testing and ensure our application works correctly under almost all the circumstances a user will encounter.
 - Manually testing all elements of a web and then shipping it into production doesn’t scale well. As the application becomes bigger and bigger, it becomes extremely impractical for the developers to test the entire web app on their own. Developers become limited to testing only the new functionality they added and hoping they didn’t break another part of the web app - this is the point where companies hire <b>QA Engineers</b>.
 - Therefore, manual testing is neither a scalable nor an efficient way to ensure software quality from the end user’s point of view.
@@ -43,7 +43,7 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 
 1. Cypress.io is not suitable to be used for automation on things like data mining, web-crawling.
 2. Cypress.io runs inside a real browser, therefore the only language that Cypress supports for writing tests in is Javascript - this doesn’t mean that we can’t test a site written in some other language than JS, it just means that the tests we write will have to be written in Javascript.
-3. We can’t test multiple tabs or multiple browser windows at the same time - main reason why Cypress doesn’t allow us to do that is because they believe that that’s really no good reason to test multiple tabs or browsers in the same test (eg. if we want to test that clicking a link opens a new tab, we only need to check that the link has the target=”\_blank” set on it). Moreover, if we need to test the functionality of a chat application which requires 2 browsers to chat with each other - we can use other methods such as stubbing.
+3. We can’t test multiple tabs or multiple browser windows at the same time - main reason why Cypress doesn’t allow us to do that is because they believe that that’s really no good reason to test multiple tabs or browsers in the same test (eg. if we want to test that clicking a link opens a new tab, we only need to check that the link has the `target=”\_blank”` set on it). Moreover, if we need to test the functionality of a chat application which requires 2 browsers to chat with each other - we can use other methods such as stubbing.
 4. Cypress doesn’t allow multiple superdomains in 1 test (A superdomain is a domain name such as google.com or linkedin.com).
 
 - Note: we can visit 2 different superdomains in 2 different tests but not in the same test.
