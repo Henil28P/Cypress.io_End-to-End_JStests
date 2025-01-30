@@ -50,3 +50,13 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - Anyways, the only time we would need to visit more than 1 superdomain in 1 test is when working with things like OAuth providers.
 
 → Besides the above permanent trade-offs, the Cypress team decides to fix issues and develop features based on the following list: https://www.github.com/cypress-io/cypress/issues
+
+# Installing and opening Cypress
+
+1. Setup an npm package and install `$ npm init -y` (initialise our directory/repo as an npm package and create the <b>package.json</b> file for us)
+2. Install Cypress into the project by `$ npm install --save-dev cypress`
+3. After Cypress installed, open up the Cypress interface by `$ npx cypress open`
+
+- It will open up a window which will have a lot of example test files that Cypress includes as a reference.
+- During the above setup steps, Cypress will add the cypress.json file to specify how Cypress runs.
+- During the above setup steps, Cypress will also add a “cypress” folder which will have its own subfolders - the subfolder we’re interested in is “integration” which contains all the example tests which are automatically generated in Cypress interface/window.
