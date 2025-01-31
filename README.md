@@ -134,3 +134,10 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - Main question: why bother with all the aliasing stuff? Why not just do: `const charsLeftSpan = cy.get('[data-cy="last-name-chars-left-count"]')` - this just won't work because of the reason that Cypress commands are asynchronous. We can't also use `await` in front of the `cy.get()` in this because Cypress commands aren't technically promises.
 
 - For working with more than 1 test (ie. more than 1 `it()` block), we can redefine the alias of a specific attribute.
+
+# Working with command results
+
+- Note: something like `const charsLeftSpan = await cy.get(...)` wouldn't work in Cypress as promises don't work in Cypress and it is asynchronous.
+- Another way to aliase elements: there is a way to get and work with the results of Cypress commands.
+- For example, to get the result of the `cy.get('[data-cy="..."]').as('charsLeftSpan')` command and have a reference to that element, use the `cy.get('@charsLeftSpan').then($charsLeftSpan =? {...});` command. `$charsLeftSpan` is the DOM element that the Cypress command returned.
+- `expect()` syntax from Chai assertion library comes standard with Cypress just like describe() and it() blocks from Mocha.
