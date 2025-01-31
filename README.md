@@ -141,3 +141,8 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - Another way to aliase elements: there is a way to get and work with the results of Cypress commands.
 - For example, to get the result of the `cy.get('[data-cy="..."]').as('charsLeftSpan')` command and have a reference to that element, use the `cy.get('@charsLeftSpan').then($charsLeftSpan =? {...});` command. `$charsLeftSpan` is the DOM element that the Cypress command returned.
 - `expect()` syntax from Chai assertion library comes standard with Cypress just like describe() and it() blocks from Mocha.
+
+# The `beforeEach` hook
+
+- Apart from all previous actions to make Cypress tests less verbose, there's still a bit of repetition going on in the code (eg. navigating to exact same web page and defining the same aliases) - would be nice if we can do that once for all the tests in 1 block (beforeEach block allows us to do this).
+- `beforeEach()` block - allow us to write code that will get executed before each of the tests run in the file.
