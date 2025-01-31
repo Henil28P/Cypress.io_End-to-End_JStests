@@ -162,3 +162,12 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - `cy.get("...").click();` to automate interaction with an element which can be clicked on the page.
 - `.check()` and `.uncheck()` Cypress commands - to automate checking the checkbox.
 - `.select()` Cypress command - to automate selection of a dropdown element.
+
+# Triggering other actions
+
+- More fine-tuned control over the actions we trigger on our application.
+- Example: find out what happened specifically on a mouse-down event or if we need an event to happen at a specific X and Y coordinate - we can use Cypress's `.trigger()` command.
+- Find an element on the web page and call `.trigger()` on it
+- Main difference is that with `.trigger()`, we can pass in the name of an event such as `mousedown` or `mouseleave` or `mouseover` or `touchstart`
+- `.trigger()` does allow us to pass extra arguments to it - in particular, if there's a reason we need to click on a specific part of an element, we can pass an X and Y-coordinates to trigger as extra arguments and these specify how far from the left and top edges respectively, the event will take place.
+- Trigger allows us to do cool things like dragging and dropping, adding custom sliders and other things that Cypress doesn't have built-in commands for.
