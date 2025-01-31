@@ -3,12 +3,6 @@ describe('Text box with max characters', () => {
     beforeEach(() => {
         // move all the cy.visit() and aliasing cy.get() commands in this beforeEach() block
         // this allows us to delete the repeated statements from the 2nd test (other it() blocks)
-    });
-
-    it('displays the appropriate remaining characters count', () => {
-        // Automate to have Cypress write in letters and check the value of our characters left text at various points to ensure it says as expected
-        // In the React web app project directory (src/pages/Example2Page.js), the number of characters left text is surrounded by a <span> tag
-
         cy.visit('http://localhost:3000/example-3');
 
         cy.get('[data-cy="last-name-chars-left-count"]')
@@ -17,6 +11,11 @@ describe('Text box with max characters', () => {
         // Create an alias for input field
         cy.get('[data-cy="input-last-name"]')
             .as('charInput');
+    });
+
+    it('displays the appropriate remaining characters count', () => {
+        // Automate to have Cypress write in letters and check the value of our characters left text at various points to ensure it says as expected
+        // In the React web app project directory (src/pages/Example2Page.js), the number of characters left text is surrounded by a <span> tag
 
         // So we can replace all instances and uses of the above cy.get() command as @charsLeftSpan
 
