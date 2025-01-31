@@ -41,4 +41,15 @@ describe('Basic page interactions', () => {
             .invoke('text')
             .should('equal', 'Option Three');
     });
+
+    // Test for hovering/mouseover interaction
+    it('should display the name of the most recently hovered item', () => {
+        cy.get('[data-cy=box-4-items-list] > :nth-child(2)') // hover mouse over 2nd item in list
+            .trigger('mouseover'); // simulate hover event of "mouseover"
+
+        // check the text inside the span element based on the above recently hovered item
+        cy.get('[data-cy=box-4-selected-name]')
+            .invoke('text')
+            .should('equal', 'Option Two');
+    });
 });
