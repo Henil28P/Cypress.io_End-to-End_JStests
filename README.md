@@ -81,3 +81,10 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 
 - Note: a good feature of Cypress is that it can automatically consider changes to tests and reloads
 - Cypress also doesn't fail our tests right away if it gets a value it doesn't expect which is a good feature of Cypress - since most of the time we'll be running full sites where nothing is instantaneous, need to wait for page to load, wait for network calls or maybe for animations, etc. --> Cypress automatically waits for about 4 seconds before concluding that something's wrong with the website.
+
+# Testing text input
+
+- Test the text functionality of web app: testing character limit, test user unable to type any keys after max character limit is reached.
+
+1. `cy.get('input').type('text to be typed via automation')` - to automate typing the text in the 'input' element.
+2. `.should('have.attr', 'value', 'expected value')` - to check the value of an element's attribute (such as "value" attribute in this case) where 'expected value' is the value of that attribute.
