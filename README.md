@@ -146,3 +146,10 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 
 - Apart from all previous actions to make Cypress tests less verbose, there's still a bit of repetition going on in the code (eg. navigating to exact same web page and defining the same aliases) - would be nice if we can do that once for all the tests in 1 block (beforeEach block allows us to do this).
 - `beforeEach()` block - allow us to write code that will get executed before each of the tests run in the file.
+
+# Setting a base URL
+
+- So far, `cy.visit('URL of web page')` has been used,
+- Most of the Cypress tests in many projects will be pointing to the same base URL and due to large number tests, it's better to avoid having the base URL over and over again in all the tests.
+- Cypress allows us to specify a base URL for our project, so that instead of typing out the full URL (`http://localhost:3000`), we can just type out the path we want to visit like: `/example-3` in the test file.
+- We need to modify the `cypress.config.js` or `cypress.json` file by adding the `baseUrl: "http://localhost:3000"` in the file.
