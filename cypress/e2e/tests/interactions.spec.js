@@ -17,4 +17,16 @@ describe('Basic page interactions', () => {
             .invoke('text') // get the actual text appeared on web page
             .should('equal', 'Option Two'); // check that the text says "Option Two" if 2nd list item is clicked
     });
-})
+
+    // Test for checkbox interaction
+    it('displays the correct count for the number of selected checkboxes', () => {
+        // in the React web app dev code, there is a div that holds the checkboxes
+        cy.get('[data-cy=box-2-checkboxes] > :nth-child(1) input') // label is the n-th child (1st) in that div so get the <input> inside the <label> element
+            .check(); // to automate to tick the 1st checkbox
+
+        // check that the text inside the span element is displaying the correct count
+        cy.get('[data-cy=box-2-selected-count]')
+            .invoke('text')
+            .should('equal', '1'); // check that the actual text is 1 to expected
+    });
+});
