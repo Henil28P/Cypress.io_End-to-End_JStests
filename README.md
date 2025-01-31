@@ -121,3 +121,16 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - The `data-cy` attribute is the preferred attribute to use for Cypress tests
 - The beauty of `data-cy` attribute is that developers can assign any unique value to it in the development code without worrying about it being linked to any styling or functionality aspects of the web app.
 - The tests are much more insulated from change than other methods.
+
+# Aliasing elements
+
+- Currently, the selectors look unnecessarily verbose and there are many places where exact same command are used over and over again (such as `cy.get()` in the test).
+- Cypress provides a way of reducing the amount of code to perform simple repetitive selecting (such as with `cy.get()`)
+- Aliasing - in Cypress, it allows us to take a rather lengthy command (such as `cy.get('[data-cy="last-name-chars-left-count"]')`) and give it a shorter name for us to refer to it later
+
+1. `<Cypress command>.as("alias_name")` - where `<Cypress command>` can be any long command that is repeated in the test file such as `cy.get('[data-cy="some long value of data-cy attribute"]')` and where "alias_name" is the name for replacing the long command to short name in future uses.
+2. `@alias_name` - this string can be used instead of the long command everytime.
+
+- Main question: why bother with all the aliasing stuff? Why not just do: `const charsLeftSpan = cy.get('[data-cy="last-name-chars-left-count"]')` - this just won't work because of the reason that Cypress commands are asynchronous. We can't also use `await` in front of the `cy.get()` in this because Cypress commands aren't technically promises.
+
+- For working with more than 1 test (ie. more than 1 `it()` block), we can redefine the alias of a specific attribute.
