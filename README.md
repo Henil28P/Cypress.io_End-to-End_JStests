@@ -60,3 +60,24 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - It will open up a window which will have a lot of example test files that Cypress includes as a reference.
 - During the above setup steps, Cypress will add the cypress.json file to specify how Cypress runs.
 - During the above setup steps, Cypress will also add a “cypress” folder which will have its own subfolders - the subfolder we’re interested in is “integration” which contains all the example tests which are automatically generated in Cypress interface/window.
+
+# Web Application under test
+
+- Locally hosted website containing many examples of form elements and other DOMs to be tested in general applications.
+
+# Writing Cypress test
+
+- One of the main uses of Cypress is to test the functionalityu of existing applications.
+- The syntax for organizing our Cypress tests is familiar to Mocha test framework as it is a backed-in version of Mocha that ships by default with Cypress.
+
+1. Use `describe()` block to define a group of tests in Cypress which allows us to group some tests which share a common theme such as checking the functionality of a button on our web site.
+2. Use `it()` block to define the actual test and separate individual tests in Mocha - there can be many `it()` blocks (many tests) in 1 `describe()` block.
+3. All Cypress commands start with `cy.`
+
+- `cy.visit('URL of web page')` to make Cypress visit the web page
+- `cy.get('element name')` - to allow Cypress to find and get the element (such as h1)
+- `.invoke('text')` - element value type (such as text) that was found
+- `.should('expected text')` - to assert on the actual text (compare expected text with above actual text gotten from Cypress).
+
+- Note: a good feature of Cypress is that it can automatically consider changes to tests and reloads
+- Cypress also doesn't fail our tests right away if it gets a value it doesn't expect which is a good feature of Cypress - since most of the time we'll be running full sites where nothing is instantaneous, need to wait for page to load, wait for network calls or maybe for animations, etc. --> Cypress automatically waits for about 4 seconds before concluding that something's wrong with the website.
