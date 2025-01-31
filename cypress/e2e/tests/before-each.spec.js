@@ -3,7 +3,7 @@ describe('Text box with max characters', () => {
     beforeEach(() => {
         // move all the cy.visit() and aliasing cy.get() commands in this beforeEach() block
         // this allows us to delete the repeated statements from the 2nd test (other it() blocks)
-        cy.visit('http://localhost:3000/example-3');
+        cy.visit('/example-3'); // this uses the baseUrl set in the cypress.config.js file
 
         cy.get('[data-cy="last-name-chars-left-count"]')
             .as('charsLeftSpan'); // this whole command tells Cypress to look at the above data-cy value selection and we want to refer to it as 'charsLeftSpan' for all future uses
@@ -42,7 +42,7 @@ describe('Text box with max characters', () => {
     // Make sure that text box doesn't allow more than 15 characters into the text box
     // Define a new test
     it('prevents the user from typing more characters once max is exceeded', () => {
-        cy.visit('http://localhost:3000/example-3');
+        cy.visit('/example-3');
 
         // Redefine the alias for input field
         cy.get('[data-cy="input-last-name"]')
