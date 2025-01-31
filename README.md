@@ -88,3 +88,36 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 
 1. `cy.get('input').type('text to be typed via automation')` - to automate typing the text in the 'input' element.
 2. `.should('have.attr', 'value', 'expected value')` - to check the value of an element's attribute (such as "value" attribute in this case) where 'expected value' is the value of that attribute.
+
+# Selecting elements
+
+- For simplicity, HTML tags (span, h1, input, etc.) can be used on `cy.get()` to select an element - however, this is a wrong way to do as the problem is that using the HTML tag is extremely dependent on the current state of the app.
+- In case where there are multiple input boxes and spans (eg. with text value 15) of same type in a form, the test will complain that we're expecting 1515 to equal 15 (actual). Another reason would be also because we're calling the selector type on 2 elements - the basic HTML selectors.
+- Hence, it's clear that using the HTML tags isn't the right way to select elements for testing.
+- Other ways than HTML tags -
+
+1. can use indexes and for example, specify that we want a select a 2nd span element on a page.
+
+- `cy.get('HTML element').eq(n)` - where 'n' is the nth index of the element. NOTE to not do something like `cy.get('HTML element:nth-of-type(1)')`.
+- However, the problem to do it in this way is the same as using HTML tags - it's just way too susceptible to change.
+- The moment developers decide to add another element to the web page or change the order of the text inputs which will enable the tests to break.
+- Therefore, HTML tags OR getting elements by index doesn't work well either.
+
+2. Selecting elements by their CSS class
+
+- In some situations, this method is still too vulnerable to non-functional changes in the web app.
+- For example, a big green button on a web page, we can select it by `cy.get('button.big-green')` - the problem with this couples tests to the appearance of the button, so if the design team decides to change colour of the button to red, then the tests will break.
+- The ID attribute, or name attribute - these are slightly better as they change less often, but they could change at times when developers decide to do a big CSS refactor or change the behaviour of the elements in some way that involves changing their other attributes.
+
+3. Selecting elements by text they contain
+
+- For example, a button on a web page with text "submit", this would allow us to get the button by `cy.contains('Submit')` - this is fairly safe in some cases but still possible to be changes and break the tests.
+- For certain parts of the web app where the text is set dynamically such as characters left text, it becomes very cumbersome to select elements by the text they contain since we have to guess at what their value might be.
+
+4. Selecting elements using special data attributes on the elements to be tested
+
+- Recommended way by Cypress to do selectors in the vast majority of cases.
+- The `data-cy` attribute is usually included by the developers (eg. React web developers in this project) in each HTML tag (eg. `<input>` tag in the React code)
+- The `data-cy` attribute is the preferred attribute to use for Cypress tests
+- The beauty of `data-cy` attribute is that developers can assign any unique value to it in the development code without worrying about it being linked to any styling or functionality aspects of the web app.
+- The tests are much more insulated from change than other methods.
