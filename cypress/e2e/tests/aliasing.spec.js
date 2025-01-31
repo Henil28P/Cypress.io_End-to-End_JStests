@@ -9,7 +9,7 @@ describe('Text box with max characters', () => {
         
         // So we can replace all instances and uses of the above cy.get() command as @charsLeftSpan
 
-        cy.get('[data-cy="last-name-chars-left-count"]') // copy and paste the data-cy attribute's value of the span element which has characters left amount
+        cy.get('@charsLeftSpan') // copy and paste the data-cy attribute's value of the span element which has characters left amount
             .invoke('text') // get the actual text value of the span element
             .should('equal', '15'); // assert that the initial value of span text is expected to be 15 (all 15 chars left)
 
@@ -17,14 +17,14 @@ describe('Text box with max characters', () => {
         cy.get('[data-cy="input-last-name"]').type('hello'); // 'hello' = 5 letters out of 15 used
 
         // Now, expect the characters left text to tell us that we have 10 characters left (15-5)
-        cy.get('[data-cy="last-name-chars-left-count"]')
+        cy.get('@charsLeftSpan')
             .invoke('text')
             .should('equal', '10'); // assert that actual text gotten from Cypress above is equal to expected text of 10 after 5 chars is reduced by 'hello'
 
         cy.get('[data-cy="input-last-name"]').type(' my friend'); // use the rest of the 10 characters left
 
         // Finally, check that no characters are left after above text inputted
-        cy.get('[data-cy="last-name-chars-left-count"]')
+        cy.get('@charsLeftSpan')
             .invoke('text')
             .should('equal', '0'); // assert that no chars are left to be typed as max limit is reached
     });
