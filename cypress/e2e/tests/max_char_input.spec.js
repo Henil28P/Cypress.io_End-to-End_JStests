@@ -23,4 +23,17 @@ describe('Text box with max characters', () => {
             .invoke('text')
             .should('equal', '0'); // assert that no chars are left to be typed as max limit is reached
     });
+
+    // Make sure that text box doesn't allow more than 15 characters into the text box
+    // Define a new test
+    it('prevents the user from typing more characters once max is exceeded', () => {
+        cy.visit('http://localhost:3000/example-2');
+
+        // Test the input element and type a long string over 15 characters
+        cy.get('input').type('abcdefghijklmnopqrstuvwxyz');
+
+        // Assertion
+        cy.get('input') // find and get the input element
+            .should('have.attr', 'value', 'abcdefghijklmno'); // assert on the 'value' attribute of the <input> element found that it should contain exactly 15 chars from the actual string typed above
+    });
 });
