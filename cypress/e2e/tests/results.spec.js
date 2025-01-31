@@ -14,8 +14,10 @@ describe('Text box with max characters', () => {
         // So we can replace all instances and uses of the above cy.get() command as @charsLeftSpan
 
         cy.get('@charsLeftSpan') // copy and paste the data-cy attribute's value of the span element which has characters left amount
-            .then($charsLeftSpan => {
-                $charsLeftSpan.invoke('text').should('equal', '15'); // this would give an error if ran as $charsLeftSpan isn't a function as $charsLeftSpan isn't the same thing as cy.get(charsLeftSpan)
+            .then($charsLeftSpan => { // jQuery-like syntax
+                // $charsLeftSpan.invoke('text').should('equal', '15'); // this would give an error if ran as $charsLeftSpan isn't a function as $charsLeftSpan isn't the same thing as cy.get(charsLeftSpan)
+                expect($charsLeftSpan.text()).to.equal('15'); // use expect() from Chai assertion library to check that the text was equal to 15
+                // expect() from Chai assertion library comes standard with Cypress just like describe() and it() blocks from Mocha
             });
 
         // Have Cypress something in the text input box
