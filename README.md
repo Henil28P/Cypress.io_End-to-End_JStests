@@ -153,3 +153,12 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - Most of the Cypress tests in many projects will be pointing to the same base URL and due to large number tests, it's better to avoid having the base URL over and over again in all the tests.
 - Cypress allows us to specify a base URL for our project, so that instead of typing out the full URL (`http://localhost:3000`), we can just type out the path we want to visit like: `/example-3` in the test file.
 - We need to modify the `cypress.config.js` or `cypress.json` file by adding the `baseUrl: "http://localhost:3000"` in the file.
+
+# Interacting with elements
+
+- So far from above, the only interaction mentioned is `.type()` command to interact with input field.
+- Note: the <b>/example-4</b> route of this project contains a playground for the interaction commands (has double-clicking, checking and unchecking boxes, selecting from dropdown and triggering a mouse-over event).
+- `cy.get("...").dblclick();` to automate interaction with a form element which can be double clicked.
+- `cy.get("...").click();` to automate interaction with an element which can be clicked on the page.
+- `.check()` and `.uncheck()` Cypress commands - to automate checking the checkbox.
+- `.select()` Cypress command - to automate selection of a dropdown element.
