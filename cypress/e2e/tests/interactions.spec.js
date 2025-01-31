@@ -29,4 +29,16 @@ describe('Basic page interactions', () => {
             .invoke('text')
             .should('equal', '1'); // check that the actual text is 1 to expected
     });
+
+    // Test for dropdown interaction - text on top to change after selecting any drop-down elements
+    it('displays the name of the currently selected item of dropdown list', () => {
+
+        cy.get('[data-cy=box-3-dropdown')
+            .select('Option Three'); // specify the option to be selected from the dropdown list through automation
+
+        // assert on the text from the span element to display the expected Option Three text as that element is selected
+        cy.get('[data-cy=box-3-selected-name]')
+            .invoke('text')
+            .should('equal', 'Option Three');
+    });
 });
