@@ -221,3 +221,13 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - Cypress only retries the last failing command.
 - For example: from `cy.get('@list').find('.list-item').should('exist')`, the `.find('.list-item')` command fails, Cypress won't go back and retry `cy.get('@list')` command, it'll only retry `.find('.list-item')` command.
 - This feature of Cypress helps us to troubleshoot if we ever find that our tests aren't working as expected.
+
+# Debugging in Cypress
+
+- If something goes wrong in a web app, many times we need to actually look at the internal state of our web app to figure out the root cause - Cypress provides several nice tools for this:
+
+1. `Simply debugger` - allows us to pause the execution of our tests at a certain point in our code.
+
+- Note: In order for the debugger to work, the Dev tools need to be open.
+- Cypress also integrates well with the browser console - for example: go to "Console" tab in the Dev tools, we see that when the tests run into the `.debug()` command, it prints some debugging info to the console - it tells stuff like the command we're debugging as well as the arguments it was called with.
+- `Current Subject` in "Console" - with Cypress, when we call `.debug()`, it sets a command line variable called <b>Subject</b> which is whatever the currently selected element is that we got from calling our last Cypress command and we can inspect the element in any way we want to (eg. get the inner text from the element by typing `subject.text()` in the Console of dev tools).
