@@ -47,9 +47,7 @@ describe('Basic page interactions', () => {
         cy.get('[data-cy=box-4-items-list] > :nth-child(2)') // hover mouse over 2nd item in list
             .trigger('mouseover') // simulate hover event of "mouseover"
             // Hence, to make sure the debugger fires at the right time:
-            .then(() => {
-                debugger;
-            });
+            .debug();
 
         // debugger; // when Cypress reaches this keyword, it will pause all the tests so we can inspect our app all we want
         // However, the above won't work due to how Cypress cues commands. Since Cypress runs asynchronously, the web app will actually pause before any other Cypress commands have taken place.
