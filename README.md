@@ -171,3 +171,40 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - Main difference is that with `.trigger()`, we can pass in the name of an event such as `mousedown` or `mouseleave` or `mouseover` or `touchstart`
 - `.trigger()` does allow us to pass extra arguments to it - in particular, if there's a reason we need to click on a specific part of an element, we can pass an X and Y-coordinates to trigger as extra arguments and these specify how far from the left and top edges respectively, the event will take place.
 - Trigger allows us to do cool things like dragging and dropping, adding custom sliders and other things that Cypress doesn't have built-in commands for.
+
+# Common Cypress Assertions
+
+- So far, only `.should('equal', 'some value...')` assertion is used.
+- Other assertions to test the behaviour of web application:
+
+1. Check the number of items/elements on a web page (checking length):
+
+- `.should('have.length',4)`
+- Useful if we have a dynamic list we want to check (eg. if our app has a to-do list that we can add items to) - in this situation, if we want to check the functionality of adding items to our list, we can simply tell Cypress to type in several items and click "Add" button and check how many items are actually on the page to see if that matches our expectations - such as `cy.get('.list-item').should('have.length', 3)`
+
+2. Check existence of an element on a web page
+
+- `.should('exist')` - checks if element exists on the web page
+- `.should('not.exist')` - checks if element does not exist on the web page
+- For example, we might want to have some element on a page that should only show up under certain circumstances (eg. if user is logged in)
+
+3. Check if an element is visible
+
+- `.should('be.visible')`
+- `.should('not.be.visible')`
+
+4. Check if certain element on a web page has a CSS class
+
+- For example, if we use CSS classes to display certain data on the screen (such as if an item in the list is selected or not with `.selected`)
+- To check the class of an element: `.should('have.class','list-item-selected')` where `list-item-selected` is the class name for this example
+
+5. Checking for specific styles of an element on a web page
+
+- Check if an element has a particular style or not such as checking if some text on a page has a strike-through: `.should('have.css','background-color','blue')` where CSS property is 'background-color' and value of that property is 'blue'.
+- Be careful of changing specific CSS styling since it can change quite frequently as design tweaks are made to the web apps.
+
+6. Checking text content of an element
+
+- `.invoke('text')`
+- `.should('contain')`
+- `.should('not.contain')`
