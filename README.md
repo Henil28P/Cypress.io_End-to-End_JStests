@@ -208,3 +208,16 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - `.invoke('text')`
 - `.should('contain')`
 - `.should('not.contain')`
+
+# Automatic Retrying
+
+- One of the biggest difficulties with End-to-End tests are <b>flaky tests</b>
+- Flaky tests - tests that pass most of the times but occasionally or in certain environments, they fail unexpectedly - the flakiness of these tests is something just like a timing issue (eg. a web app might be making some kind of network call that's taking longer than usual)
+- Cypress automatically retries tests (commands and assertions) until they pass.
+- Example scenario: a web app displays a list of people that it populates from our server. For first few fractions of a second, the list will be empty and display a spinner while the front-end loads the data. - In this case, if we add an end-to-end test that made some sort of assertion about our list (eg. a test that checks if thge list displays the people alphabetically, when the test first tries to run, it won't find any list elements at all and would fail, the naive way of fixing this would be to add a timeout to our test and make them wait a second or 2 before actually checking the list, however, not only would this slow down the tests significantly since we'd be sitting there waiting for a non-trivial amount of time for every test, but it wouldn't even necessarily solve our problem 100% of the time - there will be occassional time when the app takes just a little longer to load and still isn't ready by the time the assertion executes), Cypress will keep rerunning the failing attempt and command to find the 1st time until it finds it or until 4 seconds had gone by at which point it'd fail the test.
+- Cypress will keep retrying a failing command or assertion until either it passes or it reaches the default timeout of 4 seconds (it is also possible to change this default timeout).
+- Note: Cypress won't retry interactive commands such as `.click()` or `.type()` as those commands have the potential to change the app and cause inconsistent results if they're executed more than once.
+- Cypress will retry commands that will query the DOM such as `.get()`.
+- Cypress only retries the last failing command.
+- For example: from `cy.get('@list').find('.list-item').should('exist')`, the `.find('.list-item')` command fails, Cypress won't go back and retry `cy.get('@list')` command, it'll only retry `.find('.list-item')` command.
+- This feature of Cypress helps us to troubleshoot if we ever find that our tests aren't working as expected.
