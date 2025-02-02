@@ -292,3 +292,10 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - Cypress provides a special command for this case which is `cy.wrap()`
 - `cy.wrap()` - lets us take a jQuery element that we have as the result of a Cypress command and convert it back to a form that we can use Cypress commands on again (eg. `cy.wrap($element).should(...);`)
 - This allows <b>Consistency</b> - Since we've spent all the time learning Cypress commands, it'd be nice to have a way to use those commands under any circumstances.
+
+# The `and()` command
+
+- Some commands in Cypress provides us specific piece of functionality that we can't really access in any other way which is true for majority of the Cypress commands.
+- There are also some Cypress commands that exist almost exclusively for the sake of readability - one of these commands is the `.and()` command
+- <b>Example:</b> In Cypress, we want to make more than 1 assertion about an element (eg. check that the element has the right text, and that it has the right class)
+- So hence, to make multiple assertions like the above, we can use multiple `.should()` commands OR we can simply use `.and()` for the 2nd, 3rd, etc. assertions.
