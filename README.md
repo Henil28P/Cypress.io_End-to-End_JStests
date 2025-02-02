@@ -261,3 +261,24 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - In the file, define objects for configuration of environment variables.
 - Then, once `$ npx cypress open` is run, Cypress will automatically detect this file and load the environment variables from it.
 - Note: If we have any secret keys as environment variables in the <b>cypress.env.json</b> file, make sure to add that file to the `.gitignore` file of the project so that it doesn't get committed to the project's git repo and compromise the secret keys of the project.
+
+# Test Doubles
+
+- Generally, in end-to-end testing, we want the app being tested to mimic the production environment as closely as possible - this means to be careful about using techniques that are popular in unit and integration testing (such as mocking, or stubbing or other test doubles).
+- These are meant to make it easier to test individual pieces of the web app in isolation, but what we want to often do in end-to-end testing is make sure that our web app works correctly when all the pieces are put together, so using test doubles where they shouldn't be used will ruin the point.
+- Test doubles can sometimes be best to be used in certain times - for example: if we need to see how apps works when it encounters a server error, it's far easier to simply create a server stub that simulates an error than actually make our server fail.
+- Test doubles can also be useful when we want to make our app think that we're logged in without having to actually go through the login flow.
+- How to create and use test doubles in Cypress? Sinon Library
+- Sinon Library - popular library for test doubles. Cypress simply wraps Sinon's stub in spy APIs for us to use them in our Cypress tests.
+- Cypress provides 2 methods in Sinon Library to use stubs and spys in our Cypress tests:
+
+1. `cy.stub()`
+2. `cy.spy()`
+
+- If we know the app is going to call a certain method on some object (eg. if our app has a data access layer called "API") and we know that this object has a method called `getUser()` that will normally make a request to the server, then we can import this API object into our Cypress tests and say `cy.stub(api, 'getUser').returns({ name: 'Bill' });` - this replaces `api.getUser()` with a fake version and make `api.getUse()` return whatever we want it to.
+- This means that while the tests are running, whenever the app calls api.getUser(), instead of actually making an API request, it'll just get this object back that we defined.
+- Instead of `.returns({ name: 'Bill' });`, we can also do `.resolves({ name: 'Bill' });` which means `api.getUser()` resolves the object since our API calls would be asynchronous promises.
+- Instead of `.returns({ name: 'Bill' });` or `.resolves({ name: 'Bill' });`, we can use `.rejects()` to simulate a network error of some kind.
+- Using Spy is almost the same mechanism as using stub. The only difference is that it doesn't replace the methods, it only watches them and provides us with information that allows us to make some assertions about number of times the function was called, the arguments it was called with.
+- Example: `const mySpy = cy.spy(api, 'getUser'); expect(mySpy).to.be.called;`
+- Note: the methods listed earlier are a lot easier if our Cypress tests are in the same package alongside our code.
