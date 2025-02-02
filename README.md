@@ -282,3 +282,13 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - Using Spy is almost the same mechanism as using stub. The only difference is that it doesn't replace the methods, it only watches them and provides us with information that allows us to make some assertions about number of times the function was called, the arguments it was called with.
 - Example: `const mySpy = cy.spy(api, 'getUser'); expect(mySpy).to.be.called;`
 - Note: the methods listed earlier are a lot easier if our Cypress tests are in the same package alongside our code.
+
+# The `wrap` command
+
+- After a Cypress command (eg. `.get()`), we can add a `.then()` and an anonymous function that has access to the element (eg. `$element`) that just got selected.
+- If we want to make assertions about that element, we can't use Cypress assertions like `$element.should('equal',...);` but we instead need to use Chai assertion library's `expect($element)` syntax
+- However, we want more consistency in our tests, we want to make Cypress style assertions instead of Chai `.expect()` assertions.
+- Question: Once we have the result of one of our Cypress commands in jQuery form (ie. `$element`), how do we switch it over to something that we can call more Cypress commands on (eg. `.should()`)
+- Cypress provides a special command for this case which is `cy.wrap()`
+- `cy.wrap()` - lets us take a jQuery element that we have as the result of a Cypress command and convert it back to a form that we can use Cypress commands on again (eg. `cy.wrap($element).should(...);`)
+- This allows <b>Consistency</b> - Since we've spent all the time learning Cypress commands, it'd be nice to have a way to use those commands under any circumstances.
