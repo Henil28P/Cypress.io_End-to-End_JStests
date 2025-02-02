@@ -231,3 +231,33 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - Note: In order for the debugger to work, the Dev tools need to be open.
 - Cypress also integrates well with the browser console - for example: go to "Console" tab in the Dev tools, we see that when the tests run into the `.debug()` command, it prints some debugging info to the console - it tells stuff like the command we're debugging as well as the arguments it was called with.
 - `Current Subject` in "Console" - with Cypress, when we call `.debug()`, it sets a command line variable called <b>Subject</b> which is whatever the currently selected element is that we got from calling our last Cypress command and we can inspect the element in any way we want to (eg. get the inner text from the element by typing `subject.text()` in the Console of dev tools).
+
+# Environment variables
+
+- Environment variables are places in tests that will change depending on where the tests are running.
+- This allows us to change the URLs that the tests visit, depending on whether or not the tests are running on the development server, staging server, or production server.
+- If done the right way, it gives us a place to specify things like secret keys, since we definitely don't want to have our secret keys committed and pushed up to our git repo.
+- Cypress provides various ways to define environment variables for end-to-end tests:
+
+1. Adding the environment variables directly to our machine - to do this, open up a terminal and type `$ export CYPRESS_<name_of_env_var>="<value_of_env_var>"` (eg. `$ export CYPRESS_MY_ENV_VARIABLE="hello"`)
+
+- To access this environment variable inside our tests: on top of test file: type `Cypress.env('name of env variable defined earlier without CYPRESS_ in front'` (eg. `alert(Cypress.env('MY_ENV_VARIABLE'));` to display it in alert box).
+- However, the main problem of doing it this way is that it's not really obvious where our environment variables are coming from as there's no file that we can look at and see what the value of the `MY_ENV_VARIABLE` is. And it's also not very easy to share environment variables between machines (eg. if a new developer joins the team).
+
+2. Define environment variables by passing a flag when running Cypress from the command line.
+
+- Unset the environment variable set earlier by `$ unset MY_ENV_VARIABLE`
+- Then we can define the same environment variable on command line when running test by: `$ npx cypress open --env <name_of_env_var_to_define_without_CYPRESS_in_front>` (eg. `$ npx cypress open --env MY_ENV_VARIABLE="hello"`)
+
+3. Define environment variables by adding them to the `cypress.config.js` file (or `cypress.json` file if using older Cypress version of 2019).
+
+- This works really well for values that should be the same on all different machines.
+- Example: Add `env: {"MY_ENV_VARIABLE": "hello"}`
+
+4. Define environment variables by creating another file in the root directory of project
+
+- Create a new file in the root directory of the project and name it <b>cypress.env.json</b>
+
+- In the file, define objects for configuration of environment variables.
+- Then, once `$ npx cypress open` is run, Cypress will automatically detect this file and load the environment variables from it.
+- Note: If we have any secret keys as environment variables in the <b>cypress.env.json</b> file, make sure to add that file to the `.gitignore` file of the project so that it doesn't get committed to the project's git repo and compromise the secret keys of the project.
