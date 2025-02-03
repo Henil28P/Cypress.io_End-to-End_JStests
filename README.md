@@ -322,3 +322,13 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 
 1. `cy.get('#content-container').filter('h3')` - to select the 'h3' child element of div with id="content-container"
 2. `cy.get('#content-container').not('p')` - to select all the children of a certain DOM element that don't match a certain selector (eg. to select inside the content container except the paragraphs).
+
+# Typing special characters
+
+- Previously mentioned, the `.type()` command can be used to automate typing text into a field in a web app (eg. `cy.get(...).type('Hello')`)
+- Special characters refer to things such as simulating the user pressing the <b>Enter</b> key, <b>Tab</b> key, <b>Esc</b> key, and more.
+- These are important to test as we want to make sure that the user of our app has a great experience.
+- It can be important to make sure that little short-cuts like these using the tab or enter keys instead of clicking, behave as the user would expect them to.
+- To simulate these keys in Cypress, use the `.type('{<name_of_special_key>}');` command.
+- Example: in a to-do app, we want the user to use the <b>Enter</b> key to add new items into their to-do list, we can simulate this in Cypress by `cy.get('input').type('This is a test {enter}');`
+- Check out https://docs.cypress.io/api/commands/type.html#Arguments to see a list of special characters.
