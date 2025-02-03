@@ -299,3 +299,26 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - There are also some Cypress commands that exist almost exclusively for the sake of readability - one of these commands is the `.and()` command
 - <b>Example:</b> In Cypress, we want to make more than 1 assertion about an element (eg. check that the element has the right text, and that it has the right class)
 - So hence, to make multiple assertions like the above, we can use multiple `.should()` commands OR we can simply use `.and()` for the 2nd, 3rd, etc. assertions.
+
+# The `.filter()` and `.not()` commands
+
+- With jQuery, there is a wide range of possible situations and arrangements on a web page - to select elements in a reliable manner, there's a wide range of different commands for selecting elements in different places.
+- Cypress provides us with a lot of the standard jQuery commands, all wrapped up and available for us to call the same way that we normally call most other Cypress commands.
+- Examples:
+
+1. `cy.get(...).filter()`
+2. `cy.get(...).not()`
+
+- Example:
+  `<div id="content-container">`
+  `<!-- some child elements of the div -->`
+  `<h1>...</h1>`
+  `<p>...</p>`
+  `<h3>...</h3>`
+  `<p>...</p>`
+  `<p>...</p>`
+  `</div>`
+- To select only the subset of the children of the <b>content-container</b> div, the `.filter()` command can be used (eg. `cy.get('#content-container').filter(<selector_of_children_to_select_inside_the_container>)`). Examples:
+
+1. `cy.get('#content-container').filter('h3')` - to select the 'h3' child element of div with id="content-container"
+2. `cy.get('#content-container').not('p')` - to select all the children of a certain DOM element that don't match a certain selector (eg. to select inside the content container except the paragraphs).
