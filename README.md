@@ -332,3 +332,13 @@ An End-to-End Javascript web application testing project using Cypress.io to ena
 - To simulate these keys in Cypress, use the `.type('{<name_of_special_key>}');` command.
 - Example: in a to-do app, we want the user to use the <b>Enter</b> key to add new items into their to-do list, we can simulate this in Cypress by `cy.get('input').type('This is a test {enter}');`
 - Check out https://docs.cypress.io/api/commands/type.html#Arguments to see a list of special characters.
+
+# Activating code completion
+
+- There are a LOT of Cypress commands to keep up with and challenging to remember what they all do.
+- A helpful solution to this is to activate the in-editor intelligent code completion for Cypress so that when we write Cypress tests, we have some helpful in-editor docs that we can use to jog our memory or to see different command possibilities.
+- To set up intelligent code completion in the VS code editor, add /// directives on top of the test file.
+- Example usage: `/// <reference types="Cypress" />`
+- Once this is added, then when we write `cy.`, it will give us an ongoing list of Cypress commands possibilities.
+- It gives a clear description of what a given command does in the list and a link to more detailed docs if needed.
+- /// directives only activate docs on a per file basis. However, to activate docs for the entire project in VS code: add a new file to the project and name it "jsconfig.json" and add an object with a property "include" and put `./node_modules/cypress` and `cypress/**/*.js` as its 2 values - the in-editor docs will still work as expected and activate code completion.
